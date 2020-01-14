@@ -8,20 +8,16 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import frc.robot.subsystems.CargoSystem;
-import frc.robot.subsystems.Drivetrain;
-//import frc.robot.subsystems.GrabSystem;
-//import frc.robot.subsystems.HatchSystem;
-//import frc.robot.subsystems.IntakeSystem;
-//import frc.robot.subsystems.WinchSystem;
-
-
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.RobotDrive.MotorType;
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,70 +27,33 @@ import frc.robot.subsystems.Drivetrain;
  * project.
  */
 public class Robot extends TimedRobot {
-
-    // Adding our Hatch Winch
-    //public static WinchSystem m_winch = null;
-
-    // Adding the Drivetrain
-    public static Drivetrain m_drivetrain = null;
-
-    // Adding the compressor
-    public static Compressor m_compressor = null;
-
-    // Adding the Hatch System
-    //public static HatchSystem m_hatchsystem = null;
-
-    // Adding the Grab System
-    //public static GrabSystem m_grabsystem = null;
-
-    // Adding the Cargo System
-    //public static CargoSystem m_cargosystem = null;
-
-    // If we decide to add the rollers later,
-    // we have the system and command code ready.
-    //public static IntakeSystem m_intakesystem = null;
-
+ 
     // Input and Ouput
     public static OI m_oi;
 
     Command m_autonomousCommand;
     SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-  /**
+
+    MecanumDrive robotdrive;
+    Joystick stick = new Joystick(0);
+    
+  
+  Victor fleft = new Victor(1);
+  Victor fright = new Victor(2);
+  Victor bleft = new Victor(3);
+  Victor bright = new Victor(4);
+
+
+m_robotDrive = new MecanumDrive(fleft, fright, bleft, bright)
+
+/**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
-  @Override
+   @Override
   public void robotInit() {
 
-    // Instantiating. Make sure these occur above OI.
-    // Instantiate the Drive system.
-    m_drivetrain = new Drivetrain();
-
-    // Instantiate the Winch system.
-    //m_winch = new WinchSystem();
-
-    // Instantiate a compressor.
-    m_compressor = new Compressor(RobotMap.COMPRESSOR_ID);
-    m_compressor.setClosedLoopControl(true);
-
-    // Instantiate the Hatch System.
-    //m_hatchsystem = new HatchSystem();
-
-    // Instantiate the Grab System
-    //m_grabsystem = new GrabSystem();
-
-    // Instantiate the Cargo System
-    //m_cargosystem = new CargoSystem();
-
-    // Instantiate the Intake System in Needed
-    //m_intakesystem = new IntakeSystem();
-
-    // Need to see with the camera.
-    // Discussions online note that there is no way
-    // to rotate it in Java. Might be able to
-    // change orientation in the driver station.
-    // Must be rotated at driver station.
     CameraServer.getInstance().startAutomaticCapture();
 
     // Instantiate our input/output.
