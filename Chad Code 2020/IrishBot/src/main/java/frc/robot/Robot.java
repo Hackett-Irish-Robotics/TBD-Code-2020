@@ -35,17 +35,11 @@ public class Robot extends TimedRobot {
     SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 
-    MecanumDrive robotdrive;
-    Joystick stick = new Joystick(0);
+    MecanumDrive robotDrive;
+    Joystick stick;
     
   
-  Victor fleft = new Victor(1);
-  Victor fright = new Victor(2);
-  Victor bleft = new Victor(3);
-  Victor bright = new Victor(4);
-
-
-m_robotDrive = new MecanumDrive(fleft, fright, bleft, bright)
+    Victor frontLeft, frontRight, backLeft, backRight;
 
 /**
    * This function is run when the robot is first started up and should be
@@ -53,6 +47,15 @@ m_robotDrive = new MecanumDrive(fleft, fright, bleft, bright)
    */
    @Override
   public void robotInit() {
+
+    stick = new Joystick(0);
+
+    frontLeft = new Victor(RobotMap.leftFrontMotor);
+    frontRight = new Victor(RobotMap.rightFrontMotor);
+    backLeft = new Victor(RobotMap.leftBackMotor);
+    backRight = new Victor(RobotMap.rightBackMotor);
+
+    robotDrive = new MecanumDrive(backLeft, frontRight, backLeft, backRight);
 
     CameraServer.getInstance().startAutomaticCapture();
 
@@ -142,6 +145,9 @@ m_robotDrive = new MecanumDrive(fleft, fright, bleft, bright)
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+
+    robotDrive.driveCartesian(stick.getX(), stick.getY(), stick.getZ());
+
   }
 
   /**
@@ -149,5 +155,6 @@ m_robotDrive = new MecanumDrive(fleft, fright, bleft, bright)
    */
   @Override
   public void testPeriodic() {
+    
   }
 }

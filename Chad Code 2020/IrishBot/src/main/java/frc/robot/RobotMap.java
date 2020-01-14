@@ -30,6 +30,11 @@ public class RobotMap {
   // We need to make sure these are always linked correctly or
   // we could damage the motors.
 
+    public static final int leftFrontMotor = 1;
+    public static final int rightFrontMotor = 2;
+    public static final int leftBackMotor = 3;
+    public static final int rightBackMotor = 4;
+
   
 
 

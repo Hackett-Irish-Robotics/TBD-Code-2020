@@ -46,7 +46,8 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
 
   // Here is our Joystick controller.
-  public Joystick driverController = new Joystick(RobotMap.OI_DRIVER_CONTROLLER);
+  
+  //public Joystick driverController = new Joystick(RobotMap.OI_DRIVER_CONTROLLER);
 
     /*
     Button J1 = new JoystickButton(driverController, 1);
@@ -59,16 +60,16 @@ public class OI {
 	  Button J8 = new JoystickButton(driverController, 8);
 	  Button J9 = new JoystickButton(driverController, 9);
     Button J10 = new JoystickButton(driverController, 10);
-  */
+    */
   
    // Here is our GamePad controller 
-   public Joystick gamepadController = new Joystick(RobotMap.OI_GAMEPAD_CONTROLLER); 
+   //public Joystick gamepadController = new Joystick(RobotMap.OI_GAMEPAD_CONTROLLER); 
     
 
     //Button G1 = new JoystickButton(driverController, 1);
     //Button G2 = new JoystickButton(driverController, 2);
 
-
+  
 
   // Not used right now, but keeping just in case.
     public OI() {
